@@ -1,0 +1,101 @@
+Attributes:
+
+Categorical:
+- Nominal: values with no order or ranking
+  → Use One-Hot Encoding
+- Ordinal: ordered categorical values with hierarchy
+  → Use Label Encoding or One-Hot Encoding
+
+Numeric:
+- Discrete: fixed/countable numeric values (restricted precision)
+- Continuous: any numeric value in a range (decimals allowed)
+
+Data Imputation:
+- Mean: numeric data
+- Median: numeric data (best when outliers exist)
+- Mode: categorical data
+
+Sampling:
+- Random Sampling: equal chance selection
+- Stratified Sampling: sample from each group/stratum
+- Systematic Sampling: select every n-th observation
+
+Data Analysis Steps:
+1. Understand the problem
+2. Clean and prepare data (handle nulls, duplicates, outliers)
+3. Explore and analyze patterns (EDA)
+4. Build and evaluate models
+5. Present insights
+
+Z-Score:
+- Used for outlier detection and standardization (scaling)
+- Formula: Z = (X − Mean) / Standard Deviation
+- Best when data is normally distributed
+- Sensitive to extreme values
+
+Normal Distribution:
+- Symmetric bell-shaped curve around the mean
+- Mean, Median, Mode are equal
+- Total area = 1 (0.5 on each side of mean)
+- Empirical rule:
+    68.2% within ±1 SD
+    95.4% within ±2 SD
+    99.7% within ±3 SD
+  → Only ~0.27% removed using |Z| > 3
+- Many non-normal distributions can be transformed to normal
+
+Distribution Distortions:
+
+1. Skewness → Direction of tail
+   - Skew = 0 → perfect symmetry
+   - Acceptable range: −0.5 to +0.5 → approximately normal
+   - Moderate skew: |skew| between 0.5 and 1 → acceptable
+   - High skew: |skew| > 1 → requires transformation
+   - Positive skew → right-skewed (tail on right)
+   - Negative skew → left-skewed (tail on left)
+
+2. Kurtosis → Tail heaviness (extreme outliers)
+   - Excess Kurtosis = Kurtosis − 3 (normal has 0)
+   - Acceptable range: −1 to +1 → close to normal tails
+   - Moderate: |kurtosis| between 1 and 2 → acceptable but check outliers
+   - High: |kurtosis| > 2 → heavy tails / many outliers
+	
+   - Mesokurtic = normal tails
+   - Leptokurtic = heavy tails (more outliers)
+   - Platykurtic = light tails (fewer outliers)
+   we can use Q-Q plot and histplot for this
+
+Z-Test:
+- Hypothesis testing method (not a scaling technique)
+- Compares sample mean to population mean (known variance)
+
+IQR:
+- Outlier detection for skewed data
+- IQR = Q3 − Q1
+- More robust than Z-score (not affected by extreme values)
+
+Outliers:
+- If due to natural variation → may keep or cap
+- If due to data entry / measurement error → remove
+
+Y-axis options for plots:
+- Count
+- Density
+- Probability
+
+Algorithms tolerant to outliers (Decision-based):
+- Decision Trees
+- Random Forest
+- XGBoost
+- Gradient Boosting
+
+Transformers to normalize skewed distributions:
+1. Power Transformer (sklearn) → robust, effective
+2. Log, Square, Cube, etc. (NumPy) → may reduce interpretability
+
+
+Power Transformer:
+  from sklearn.preprocessing import PowerTransformer
+	trans = PowerTransformer(method) method can be box-cox or yeo-johnson
+  
+
